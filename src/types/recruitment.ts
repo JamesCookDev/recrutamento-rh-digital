@@ -45,6 +45,72 @@ export interface DashboardMetrics {
   timelineData: Array<{ month: string; opened: number; closed: number }>;
 }
 
+export interface Candidate {
+  id: string;
+  positionId: string;
+  name: string;
+  email: string;
+  phone: string;
+  resume?: string;
+  source: 'linkedin' | 'website' | 'referral' | 'agency' | 'other';
+  currentStage: CandidateStage;
+  score?: number;
+  notes?: string;
+  appliedAt: Date;
+  lastUpdated: Date;
+  interviews: Interview[];
+  documents: Document[];
+}
+
+export interface Interview {
+  id: string;
+  candidateId: string;
+  type: 'phone' | 'video' | 'in_person' | 'technical';
+  stage: CandidateStage;
+  scheduledAt: Date;
+  duration: number; // em minutos
+  interviewer: string;
+  status: 'scheduled' | 'completed' | 'cancelled' | 'no_show';
+  feedback?: string;
+  score?: number;
+  createdAt: Date;
+}
+
+export interface Document {
+  id: string;
+  candidateId: string;
+  type: 'resume' | 'cover_letter' | 'portfolio' | 'certificate' | 'other';
+  name: string;
+  url: string;
+  uploadedAt: Date;
+}
+
+export type CandidateStage = 
+  | 'applied'
+  | 'screening' 
+  | 'phone_interview'
+  | 'technical_test'
+  | 'in_person_interview'
+  | 'final_interview'
+  | 'offer_made'
+  | 'hired'
+  | 'rejected';
+
+export interface FunnelStage {
+  id: CandidateStage;
+  name: string;
+  color: string;
+  order: number;
+}
+
+export interface CandidateMetrics {
+  totalCandidates: number;
+  candidatesByStage: Array<{ stage: string; count: number }>;
+  conversionRates: Array<{ from: string; to: string; rate: number }>;
+  avgTimeInStage: Array<{ stage: string; days: number }>;
+  topSources: Array<{ source: string; count: number }>;
+}
+
 export interface FilterOptions {
   departments: string[];
   status: RecruitmentPosition['status'][];

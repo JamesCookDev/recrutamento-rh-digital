@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { StatusBadge } from './StatusBadge';
-import { RecruitmentPosition } from '@/types/recruitment';
+import { RecruitmentPosition, Candidate } from '@/types/recruitment';
 import { 
   MapPin, 
   Calendar, 
@@ -12,9 +12,11 @@ import {
   Eye,
   Edit,
   MoreHorizontal,
-  BarChart3
+  BarChart3,
+  UserCheck
 } from 'lucide-react';
 import { TimelineDialog } from './TimelineDialog';
+import { CandidateDialog } from './CandidateDialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,11 +26,26 @@ import {
 
 interface PositionCardProps {
   position: RecruitmentPosition;
+  candidates: Candidate[];
   onView?: (position: RecruitmentPosition) => void;
   onEdit?: (position: RecruitmentPosition) => void;
+  onAddCandidate: () => void;
+  onViewCandidate: (candidateId: string) => void;
+  onScheduleInterview: (candidateId: string) => void;
+  onMoveCandidate: (candidateId: string, newStage: any) => void;
 }
 
-export function PositionCard({ position, onView, onEdit }: PositionCardProps) {
+export function PositionCard({ 
+  position, 
+  candidates, 
+  onView, 
+  onEdit, 
+  onAddCandidate, 
+  onViewCandidate, 
+  onScheduleInterview, 
+  onMoveCandidate 
+}: PositionCardProps) {
+  const positionCandidates = candidates.filter(c => c.positionId === position.id);
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -101,6 +118,22 @@ export function PositionCard({ position, onView, onEdit }: PositionCardProps) {
                       </div>
                     }
                   />
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <CandidateDialog
+                    positionId={position.id}
+                    positionTitle={position.jobTitle}
+                    candidates={candidates}
+                    onAddCandidate={onAddCandidate}
+                    onViewCandidate={onViewCandidate}
+                    onScheduleInterview={onScheduleInterview}
+                    onMoveCandidate={onMoveCandidate}
+                  >
+                    <div className="flex items-center w-full">
+                      <UserCheck className="h-4 w-4 mr-2" />
+                      Candidatos ({positionCandidates.length})
+                    </div>
+                  </CandidateDialog>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

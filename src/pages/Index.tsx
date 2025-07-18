@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Dashboard } from '@/components/recruitment/Dashboard';
 import { PositionCard } from '@/components/recruitment/PositionCard';
 import { PositionFilters } from '@/components/recruitment/PositionFilters';
-import { mockPositions, mockDashboardMetrics } from '@/data/mockData';
-import { FilterOptions, RecruitmentPosition } from '@/types/recruitment';
+import { mockPositions, mockDashboardMetrics, mockCandidates } from '@/data/mockData';
+import { FilterOptions, RecruitmentPosition, Candidate, CandidateStage } from '@/types/recruitment';
 import { Plus, BarChart3, Users, Edit } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { PositionFormDialog } from '@/components/recruitment/PositionFormDialog';
@@ -62,6 +62,22 @@ const Index = () => {
     console.log('Editar vaga:', position.id);
   };
 
+  const handleAddCandidate = () => {
+    console.log('Adicionar candidato');
+  };
+
+  const handleViewCandidate = (candidateId: string) => {
+    console.log('Ver candidato:', candidateId);
+  };
+
+  const handleScheduleInterview = (candidateId: string) => {
+    console.log('Agendar entrevista:', candidateId);
+  };
+
+  const handleMoveCandidate = (candidateId: string, newStage: CandidateStage) => {
+    console.log('Mover candidato:', candidateId, 'para', newStage);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -114,8 +130,13 @@ const Index = () => {
                   <PositionCard
                     key={position.id}
                     position={position}
+                    candidates={mockCandidates}
                     onView={handleViewPosition}
                     onEdit={handleEditPosition}
+                    onAddCandidate={handleAddCandidate}
+                    onViewCandidate={handleViewCandidate}
+                    onScheduleInterview={handleScheduleInterview}
+                    onMoveCandidate={handleMoveCandidate}
                   />
                 ))}
               </div>

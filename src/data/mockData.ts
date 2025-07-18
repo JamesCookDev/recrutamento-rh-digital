@@ -1,4 +1,4 @@
-import { RecruitmentPosition, DashboardMetrics } from '@/types/recruitment';
+import { RecruitmentPosition, DashboardMetrics, Candidate } from '@/types/recruitment';
 
 export const mockPositions: RecruitmentPosition[] = [
   {
@@ -119,3 +119,117 @@ export const mockDashboardMetrics: DashboardMetrics = {
     { month: 'Jun', opened: 9, closed: 8 }
   ]
 };
+
+export const mockCandidates: Candidate[] = [
+  {
+    id: '1',
+    positionId: '1',
+    name: 'João Pereira Silva',
+    email: 'joao.silva@email.com',
+    phone: '(11) 99999-1234',
+    source: 'linkedin',
+    currentStage: 'hired',
+    score: 9,
+    notes: 'Excelente candidato, experiência sólida em RH',
+    appliedAt: new Date('2024-01-16'),
+    lastUpdated: new Date('2024-02-10'),
+    interviews: [],
+    documents: []
+  },
+  {
+    id: '2',
+    positionId: '1',
+    name: 'Maria Costa Santos',
+    email: 'maria.costa@email.com',
+    phone: '(11) 98888-5678',
+    source: 'referral',
+    currentStage: 'final_interview',
+    score: 8,
+    appliedAt: new Date('2024-01-18'),
+    lastUpdated: new Date('2024-02-08'),
+    interviews: [],
+    documents: []
+  },
+  {
+    id: '3',
+    positionId: '2',
+    name: 'Carlos Mendes Oliveira',
+    email: 'carlos.oliveira@email.com',
+    phone: '(21) 97777-9012',
+    source: 'website',
+    currentStage: 'technical_test',
+    score: 7,
+    appliedAt: new Date('2024-01-22'),
+    lastUpdated: new Date('2024-01-26'),
+    interviews: [],
+    documents: []
+  },
+  {
+    id: '4',
+    positionId: '2',
+    name: 'Ana Paula Lima',
+    email: 'ana.lima@email.com',
+    phone: '(21) 96666-3456',
+    source: 'linkedin',
+    currentStage: 'in_person_interview',
+    score: 8,
+    appliedAt: new Date('2024-01-25'),
+    lastUpdated: new Date('2024-01-30'),
+    interviews: [],
+    documents: []
+  },
+  {
+    id: '5',
+    positionId: '2',
+    name: 'Roberto Silva Junior',
+    email: 'roberto.junior@email.com',
+    phone: '(21) 95555-7890',
+    source: 'agency',
+    currentStage: 'phone_interview',
+    appliedAt: new Date('2024-01-28'),
+    lastUpdated: new Date('2024-02-01'),
+    interviews: [],
+    documents: []
+  },
+  {
+    id: '6',
+    positionId: '3',
+    name: 'Fernanda Almeida',
+    email: 'fernanda.almeida@email.com',
+    phone: '(31) 94444-2468',
+    source: 'referral',
+    currentStage: 'screening',
+    score: 6,
+    appliedAt: new Date('2024-02-02'),
+    lastUpdated: new Date('2024-02-03'),
+    interviews: [],
+    documents: []
+  },
+  {
+    id: '7',
+    positionId: '3',
+    name: 'Ricardo Santos Neto',
+    email: 'ricardo.neto@email.com',
+    phone: '(31) 93333-1357',
+    source: 'linkedin',
+    currentStage: 'applied',
+    appliedAt: new Date('2024-02-05'),
+    lastUpdated: new Date('2024-02-05'),
+    interviews: [],
+    documents: []
+  },
+  {
+    id: '8',
+    positionId: '1',
+    name: 'Patricia Rocha',
+    email: 'patricia.rocha@email.com',
+    phone: '(11) 92222-9753',
+    source: 'website',
+    currentStage: 'rejected',
+    notes: 'Não atendeu aos requisitos mínimos',
+    appliedAt: new Date('2024-01-20'),
+    lastUpdated: new Date('2024-01-25'),
+    interviews: [],
+    documents: []
+  }
+];
