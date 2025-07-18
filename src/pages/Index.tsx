@@ -4,9 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Dashboard } from '@/components/recruitment/Dashboard';
 import { PositionCard } from '@/components/recruitment/PositionCard';
 import { PositionFilters } from '@/components/recruitment/PositionFilters';
+import { ReportsExport } from '@/components/recruitment/ReportsExport';
 import { mockPositions, mockDashboardMetrics, mockCandidates } from '@/data/mockData';
 import { FilterOptions, RecruitmentPosition, Candidate, CandidateStage } from '@/types/recruitment';
-import { Plus, BarChart3, Users, Edit } from 'lucide-react';
+import { Plus, BarChart3, Users, Edit, FileDown } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { PositionFormDialog } from '@/components/recruitment/PositionFormDialog';
 import { PositionFormData } from '@/schemas/recruitment';
@@ -99,7 +100,7 @@ const Index = () => {
       {/* Conteúdo Principal */}
       <main className="container mx-auto px-4 py-6">
         <Tabs defaultValue="dashboard" className="space-y-6">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
+          <TabsList className="grid w-full max-w-lg mx-auto grid-cols-3">
             <TabsTrigger value="dashboard" className="gap-2">
               <BarChart3 className="h-4 w-4" />
               Dashboard
@@ -108,10 +109,22 @@ const Index = () => {
               <Users className="h-4 w-4" />
               Vagas ({filteredPositions.length})
             </TabsTrigger>
+            <TabsTrigger value="reports" className="gap-2">
+              <FileDown className="h-4 w-4" />
+              Relatórios
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="dashboard" className="space-y-6">
             <Dashboard metrics={mockDashboardMetrics} />
+          </TabsContent>
+
+          <TabsContent value="reports" className="space-y-6">
+            <ReportsExport 
+              positions={filteredPositions}
+              candidates={mockCandidates}
+              metrics={mockDashboardMetrics}
+            />
           </TabsContent>
 
           <TabsContent value="positions" className="space-y-6">
