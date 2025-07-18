@@ -11,8 +11,10 @@ import {
   Clock,
   Eye,
   Edit,
-  MoreHorizontal 
+  MoreHorizontal,
+  BarChart3
 } from 'lucide-react';
+import { TimelineDialog } from './TimelineDialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -88,6 +90,17 @@ export function PositionCard({ position, onView, onEdit }: PositionCardProps) {
                 <DropdownMenuItem onClick={() => onEdit?.(position)}>
                   <Edit className="h-4 w-4 mr-2" />
                   Editar
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <TimelineDialog 
+                    position={position}
+                    trigger={
+                      <div className="flex items-center w-full">
+                        <BarChart3 className="h-4 w-4 mr-2" />
+                        Timeline
+                      </div>
+                    }
+                  />
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
