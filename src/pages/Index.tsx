@@ -6,8 +6,10 @@ import { PositionCard } from '@/components/recruitment/PositionCard';
 import { PositionFilters } from '@/components/recruitment/PositionFilters';
 import { mockPositions, mockDashboardMetrics } from '@/data/mockData';
 import { FilterOptions, RecruitmentPosition } from '@/types/recruitment';
-import { Plus, BarChart3, Users } from 'lucide-react';
+import { Plus, BarChart3, Users, Edit } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { PositionFormDialog } from '@/components/recruitment/PositionFormDialog';
+import { PositionFormData } from '@/schemas/recruitment';
 
 const Index = () => {
   const { toast } = useToast();
@@ -43,11 +45,9 @@ const Index = () => {
     });
   }, [mockPositions, searchTerm, filters]);
 
-  const handleCreatePosition = () => {
-    toast({
-      title: "Nova Vaga",
-      description: "Funcionalidade de criação de vaga em desenvolvimento.",
-    });
+  const handleCreatePosition = (data: PositionFormData) => {
+    console.log('Nova vaga criada:', data);
+    // Aqui você integraria com o Supabase para salvar a vaga
   };
 
   const handleViewPosition = (position: RecruitmentPosition) => {
@@ -58,10 +58,8 @@ const Index = () => {
   };
 
   const handleEditPosition = (position: RecruitmentPosition) => {
-    toast({
-      title: "Editar Vaga",
-      description: `Editando vaga: ${position.jobTitle}`,
-    });
+    // Função será implementada com o dialog de edição
+    console.log('Editar vaga:', position.id);
   };
 
   return (
@@ -74,10 +72,10 @@ const Index = () => {
               <h1 className="text-2xl font-bold text-foreground">Mapa de Recrutamento</h1>
               <p className="text-muted-foreground">Sistema de controle de processos seletivos</p>
             </div>
-            <Button onClick={handleCreatePosition} className="gap-2">
-              <Plus className="h-4 w-4" />
-              Nova Vaga
-            </Button>
+            <PositionFormDialog 
+              mode="create" 
+              onSuccess={handleCreatePosition}
+            />
           </div>
         </div>
       </header>
@@ -130,10 +128,16 @@ const Index = () => {
                 <p className="text-muted-foreground mb-4">
                   Tente ajustar os filtros ou criar uma nova vaga.
                 </p>
-                <Button onClick={handleCreatePosition} variant="outline">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Criar Nova Vaga
-                </Button>
+                <PositionFormDialog 
+                  mode="create" 
+                  onSuccess={handleCreatePosition}
+                  trigger={
+                    <Button variant="outline">
+                      <Plus className="h-4 w-4 mr-2" />
+                      Criar Nova Vaga
+                    </Button>
+                  }
+                />
               </div>
             )}
           </TabsContent>
