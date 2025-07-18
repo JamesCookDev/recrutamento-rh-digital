@@ -11,6 +11,7 @@ import { Plus, BarChart3, Users, Edit, FileDown } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { PositionFormDialog } from '@/components/recruitment/PositionFormDialog';
 import { PositionFormData } from '@/schemas/recruitment';
+import { SolarFooter } from '@/components/recruitment/SolarFooter';
 
 const Index = () => {
   const { toast } = useToast();
@@ -81,18 +82,35 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card/50 backdrop-blur supports-[backdrop-filter]:bg-card/50">
-        <div className="container mx-auto px-4 py-4">
+      {/* Header com identidade visual da Resolve */}
+      <header className="solar-header border-b border-border/20 backdrop-blur supports-[backdrop-filter]:bg-card/50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-warning/10 opacity-50"></div>
+        <div className="container mx-auto px-4 py-6 relative z-10">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-foreground">Mapa de Recrutamento</h1>
-              <p className="text-muted-foreground">Sistema de controle de processos seletivos</p>
+            <div className="space-y-2">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <span className="text-xl font-bold">⚡</span>
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold text-primary-foreground">
+                    Resolve Energia Solar
+                  </h1>
+                  <p className="text-primary-foreground/80 text-sm">
+                    Sistema de Recrutamento & Seleção
+                  </p>
+                </div>
+              </div>
+              <p className="text-primary-foreground/70 max-w-md">
+                Gerenciamento inteligente de processos seletivos para construir o futuro sustentável
+              </p>
             </div>
-            <PositionFormDialog 
-              mode="create" 
-              onSuccess={handleCreatePosition}
-            />
+            <div className="solar-glow">
+              <PositionFormDialog 
+                mode="create" 
+                onSuccess={handleCreatePosition}
+              />
+            </div>
           </div>
         </div>
       </header>
@@ -140,35 +158,38 @@ const Index = () => {
             {filteredPositions.length > 0 ? (
               <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                 {filteredPositions.map((position) => (
-                  <PositionCard
-                    key={position.id}
-                    position={position}
-                    candidates={mockCandidates}
-                    onView={handleViewPosition}
-                    onEdit={handleEditPosition}
-                    onAddCandidate={handleAddCandidate}
-                    onViewCandidate={handleViewCandidate}
-                    onScheduleInterview={handleScheduleInterview}
-                    onMoveCandidate={handleMoveCandidate}
-                  />
+                  <div key={position.id} className="group hover:scale-[1.02] transition-all duration-300">
+                    <PositionCard
+                      position={position}
+                      candidates={mockCandidates}
+                      onView={handleViewPosition}
+                      onEdit={handleEditPosition}
+                      onAddCandidate={handleAddCandidate}
+                      onViewCandidate={handleViewCandidate}
+                      onScheduleInterview={handleScheduleInterview}
+                      onMoveCandidate={handleMoveCandidate}
+                    />
+                  </div>
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12 bg-card rounded-lg border border-border">
-                <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-foreground mb-2">
-                  Nenhuma vaga encontrada
+              <div className="text-center py-16 solar-card max-w-md mx-auto">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary/20 to-warning/20 flex items-center justify-center">
+                  <Users className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-3">
+                  Pronto para encontrar talentos?
                 </h3>
-                <p className="text-muted-foreground mb-4">
-                  Tente ajustar os filtros ou criar uma nova vaga.
+                <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
+                  Crie sua primeira vaga e comece a construir a equipe dos sonhos para a Resolve Energia Solar.
                 </p>
                 <PositionFormDialog 
                   mode="create" 
                   onSuccess={handleCreatePosition}
                   trigger={
-                    <Button variant="outline">
+                    <Button className="solar-glow">
                       <Plus className="h-4 w-4 mr-2" />
-                      Criar Nova Vaga
+                      Criar Primeira Vaga
                     </Button>
                   }
                 />
@@ -177,6 +198,8 @@ const Index = () => {
           </TabsContent>
         </Tabs>
       </main>
+      
+      <SolarFooter />
     </div>
   );
 };

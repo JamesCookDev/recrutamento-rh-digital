@@ -8,54 +8,63 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 224 15% 15%;
+    /* Cores Base - Tema Resolve Energia Solar */
+    --background: 45 25% 98%;
+    --foreground: 45 15% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 224 15% 15%;
+    --card-foreground: 45 15% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 224 15% 15%;
+    --popover-foreground: 45 15% 10%;
 
-    --primary: 48 89% 70%;
-    --primary-foreground: 0 0% 15%;
-    --primary-hover: 48 89% 65%;
+    /* Amarelo Solar - Cor principal da Resolve */
+    --primary: 45 95% 65%;
+    --primary-foreground: 45 15% 8%;
+    --primary-hover: 45 95% 60%;
+    --primary-glow: 45 100% 75%;
 
-    --secondary: 48 20% 95%;
-    --secondary-foreground: 48 15% 25%;
+    /* Amarelo secundário mais suave */
+    --secondary: 45 35% 92%;
+    --secondary-foreground: 45 25% 20%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 8% 46%;
+    --muted: 45 15% 95%;
+    --muted-foreground: 45 8% 45%;
 
-    --accent: 48 25% 90%;
-    --accent-foreground: 48 15% 25%;
+    --accent: 45 40% 88%;
+    --accent-foreground: 45 25% 15%;
 
-    --success: 142 71% 45%;
+    /* Verde para sucesso - representa sustentabilidade */
+    --success: 120 65% 45%;
     --success-foreground: 0 0% 98%;
 
-    --warning: 45 93% 58%;
-    --warning-foreground: 220 15% 15%;
+    /* Laranja para avisos - energia */
+    --warning: 35 85% 60%;
+    --warning-foreground: 35 15% 10%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 48 89% 70%;
+    --border: 45 20% 88%;
+    --input: 45 20% 90%;
+    --ring: 45 95% 65%;
 
-    --chart-1: 48 89% 70%;
-    --chart-2: 142 71% 45%;
-    --chart-3: 280 70% 60%;
-    --chart-4: 45 93% 58%;
-    --chart-5: 0 72% 51%;
+    /* Paleta de cores para gráficos - tema energia solar */
+    --chart-1: 45 95% 65%;  /* Amarelo solar */
+    --chart-2: 120 65% 45%; /* Verde sustentável */
+    --chart-3: 35 85% 60%;  /* Laranja energia */
+    --chart-4: 200 75% 55%; /* Azul céu */
+    --chart-5: 280 60% 55%; /* Roxo inovação */
 
-    /* Gradientes para elementos especiais */
-    --gradient-primary: linear-gradient(135deg, hsl(48 89% 70%), hsl(48 89% 75%));
-    --gradient-success: linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 52%));
+    /* Gradientes especiais para energia solar */
+    --gradient-primary: linear-gradient(135deg, hsl(45 95% 65%), hsl(45 100% 75%));
+    --gradient-success: linear-gradient(135deg, hsl(120 65% 45%), hsl(120 70% 52%));
+    --gradient-solar: linear-gradient(135deg, hsl(45 95% 65%), hsl(35 85% 60%));
     
-    /* Sombras elegantes */
-    --shadow-card: 0 1px 3px 0 hsl(220 13% 91% / 0.1), 0 1px 2px -1px hsl(220 13% 91% / 0.1);
-    --shadow-elevated: 0 4px 6px -1px hsl(220 13% 91% / 0.1), 0 2px 4px -2px hsl(220 13% 91% / 0.1);
+    /* Sombras elegantes com toque solar */
+    --shadow-card: 0 1px 3px 0 hsl(45 30% 85% / 0.2), 0 1px 2px -1px hsl(45 30% 85% / 0.2);
+    --shadow-elevated: 0 4px 6px -1px hsl(45 30% 85% / 0.3), 0 2px 4px -2px hsl(45 30% 85% / 0.3);
+    --shadow-glow: 0 0 20px hsl(45 95% 65% / 0.2);
 
     --radius: 0.5rem;
 
@@ -77,41 +86,57 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Tema escuro com toque solar */
+    --background: 45 15% 8%;
+    --foreground: 45 25% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 45 20% 12%;
+    --card-foreground: 45 25% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 45 20% 12%;
+    --popover-foreground: 45 25% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 45 95% 70%;
+    --primary-foreground: 45 15% 8%;
+    --primary-hover: 45 95% 65%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 45 25% 18%;
+    --secondary-foreground: 45 35% 85%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 45 20% 15%;
+    --muted-foreground: 45 15% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 45 30% 22%;
+    --accent-foreground: 45 35% 85%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --success: 120 65% 50%;
+    --success-foreground: 45 15% 8%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --warning: 35 85% 65%;
+    --warning-foreground: 45 15% 8%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 45 25% 95%;
+
+    --border: 45 25% 20%;
+    --input: 45 25% 18%;
+    --ring: 45 95% 70%;
+
+    /* Gráficos em modo escuro */
+    --chart-1: 45 95% 70%;
+    --chart-2: 120 65% 50%;
+    --chart-3: 35 85% 65%;
+    --chart-4: 200 75% 60%;
+    --chart-5: 280 60% 60%;
+
+    --sidebar-background: 45 20% 10%;
+    --sidebar-foreground: 45 25% 90%;
+    --sidebar-primary: 45 95% 70%;
+    --sidebar-primary-foreground: 45 15% 8%;
+    --sidebar-accent: 45 25% 15%;
+    --sidebar-accent-foreground: 45 25% 90%;
+    --sidebar-border: 45 25% 18%;
+    --sidebar-ring: 45 95% 70%;
   }
 }
 
@@ -122,5 +147,24 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Classes utilitárias para energia solar */
+  .solar-gradient {
+    background: var(--gradient-solar);
+  }
+  
+  .solar-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .solar-card {
+    @apply bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-all duration-300;
+  }
+  
+  .solar-header {
+    @apply solar-gradient text-primary-foreground;
   }
 }
