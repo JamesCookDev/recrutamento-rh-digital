@@ -1,12 +1,144 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useMemo } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Dashboard } from '@/components/recruitment/Dashboard';
+import { PositionCard } from '@/components/recruitment/PositionCard';
+import { PositionFilters } from '@/components/recruitment/PositionFilters';
+import { mockPositions, mockDashboardMetrics } from '@/data/mockData';
+import { FilterOptions, RecruitmentPosition } from '@/types/recruitment';
+import { Plus, BarChart3, Users } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
+  const { toast } = useToast();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filters, setFilters] = useState<FilterOptions>({
+    departments: [],
+    status: [],
+    recruitmentType: [],
+    positionLevel: [],
+    dateRange: {}
+  });
+
+  // Filtrar posições baseado nos filtros e busca
+  const filteredPositions = useMemo(() => {
+    return mockPositions.filter(position => {
+      // Filtro de busca
+      const searchMatch = searchTerm === '' || 
+        position.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        position.positionCode.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        position.department.toLowerCase().includes(searchTerm.toLowerCase());
+
+      // Filtros específicos
+      const statusMatch = filters.status.length === 0 || filters.status.includes(position.status);
+      const typeMatch = filters.recruitmentType.length === 0 || filters.recruitmentType.includes(position.recruitmentType);
+      const levelMatch = filters.positionLevel.length === 0 || filters.positionLevel.includes(position.positionLevel);
+      const deptMatch = filters.departments.length === 0 || filters.departments.includes(position.department);
+
+      // Filtros de data
+      const startDateMatch = !filters.dateRange.start || position.openingDate >= filters.dateRange.start;
+      const endDateMatch = !filters.dateRange.end || position.openingDate <= filters.dateRange.end;
+
+      return searchMatch && statusMatch && typeMatch && levelMatch && deptMatch && startDateMatch && endDateMatch;
+    });
+  }, [mockPositions, searchTerm, filters]);
+
+  const handleCreatePosition = () => {
+    toast({
+      title: "Nova Vaga",
+      description: "Funcionalidade de criação de vaga em desenvolvimento.",
+    });
+  };
+
+  const handleViewPosition = (position: RecruitmentPosition) => {
+    toast({
+      title: "Visualizar Vaga",
+      description: `Abrindo detalhes da vaga: ${position.jobTitle}`,
+    });
+  };
+
+  const handleEditPosition = (position: RecruitmentPosition) => {
+    toast({
+      title: "Editar Vaga",
+      description: `Editando vaga: ${position.jobTitle}`,
+    });
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="border-b border-border bg-card/50 backdrop-blur supports-[backdrop-filter]:bg-card/50">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-foreground">Mapa de Recrutamento</h1>
+              <p className="text-muted-foreground">Sistema de controle de processos seletivos</p>
+            </div>
+            <Button onClick={handleCreatePosition} className="gap-2">
+              <Plus className="h-4 w-4" />
+              Nova Vaga
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Conteúdo Principal */}
+      <main className="container mx-auto px-4 py-6">
+        <Tabs defaultValue="dashboard" className="space-y-6">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
+            <TabsTrigger value="dashboard" className="gap-2">
+              <BarChart3 className="h-4 w-4" />
+              Dashboard
+            </TabsTrigger>
+            <TabsTrigger value="positions" className="gap-2">
+              <Users className="h-4 w-4" />
+              Vagas ({filteredPositions.length})
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="dashboard" className="space-y-6">
+            <Dashboard metrics={mockDashboardMetrics} />
+          </TabsContent>
+
+          <TabsContent value="positions" className="space-y-6">
+            {/* Filtros */}
+            <PositionFilters
+              filters={filters}
+              onFiltersChange={setFilters}
+              searchTerm={searchTerm}
+              onSearchChange={setSearchTerm}
+            />
+
+            {/* Lista de Vagas */}
+            {filteredPositions.length > 0 ? (
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                {filteredPositions.map((position) => (
+                  <PositionCard
+                    key={position.id}
+                    position={position}
+                    onView={handleViewPosition}
+                    onEdit={handleEditPosition}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 bg-card rounded-lg border border-border">
+                <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  Nenhuma vaga encontrada
+                </h3>
+                <p className="text-muted-foreground mb-4">
+                  Tente ajustar os filtros ou criar uma nova vaga.
+                </p>
+                <Button onClick={handleCreatePosition} variant="outline">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Criar Nova Vaga
+                </Button>
+              </div>
+            )}
+          </TabsContent>
+        </Tabs>
+      </main>
     </div>
   );
 };
